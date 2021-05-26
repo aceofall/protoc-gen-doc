@@ -9,11 +9,13 @@ RUN apt-get -q -y update && \
   unzip protoc-3.6.1-linux-x86_64.zip -d ./usr/local && \
   rm protoc-3.6.1-linux-x86_64.zip && \
   apt-get remove --purge -y unzip && \
+  apt-get install python3 -y && \
   apt-get autoremove && \
   rm -rf /var/lib/apt/lists/*
 
 ADD dist/protoc-gen-doc /usr/local/bin/
 ADD script/entrypoint.sh ./
+ADD script/filter.py ./
 
 VOLUME ["/out", "/protos"]
 
